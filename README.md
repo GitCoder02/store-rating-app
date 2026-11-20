@@ -173,6 +173,9 @@ All seeded demo accounts share the password: **`Password123!`**
 
 *(You can also use the **Sign Up** page to register any new Normal User account with custom details).*
 
+> **💡 Evaluator Convenience Feature (One-Click Demo Login):**  
+> To make evaluating each role's dashboard seamless without tedious manual copy-pasting of credentials, the **Login page** includes an interactive **"Demo Credentials Quick-Fill"** section. Clicking any role button (*System Administrator*, *Store Owner*, or *Normal User*) automatically populates the form with valid seed credentials for immediate 1-click sign-in.
+
 ---
 
 ## 🗄️ Database Schema Design

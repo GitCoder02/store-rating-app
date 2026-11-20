@@ -122,12 +122,12 @@ export default function AdminDashboard() {
   }, []);
 
   useEffect(() => {
-    if (activeTab === 'stores') {
-      loadStores();
-    } else {
-      loadUsers();
-    }
-  }, [activeTab, loadStores, loadUsers]);
+    loadStores();
+  }, [loadStores]);
+
+  useEffect(() => {
+    loadUsers();
+  }, [loadUsers]);
 
   const handleStoreSort = (field) => {
     setStoreSort((prev) => ({
@@ -169,6 +169,7 @@ export default function AdminDashboard() {
 
       setStoreModalSuccess('Store registered successfully');
       loadStores();
+      loadUsers();
       loadStats();
       setTimeout(() => {
         setIsAddStoreOpen(false);
@@ -225,6 +226,7 @@ export default function AdminDashboard() {
 
       setUserModalSuccess('User created successfully');
       loadUsers();
+      loadStores();
       loadStats();
       setTimeout(() => {
         setIsAddUserOpen(false);
@@ -334,7 +336,7 @@ export default function AdminDashboard() {
           <Building2 size={16} />
           <span>Stores Management</span>
           <span className="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-semibold">
-            {stores.length}
+            {stores.length > 0 || (storeFilters.name || storeFilters.email || storeFilters.address) ? stores.length : (stats.totalStores ?? 0)}
           </span>
         </button>
         <button
@@ -348,7 +350,7 @@ export default function AdminDashboard() {
           <Users size={16} />
           <span>Users Management</span>
           <span className="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-semibold">
-            {users.length}
+            {users.length > 0 || (userFilters.name || userFilters.email || userFilters.address || userFilters.role !== 'ALL') ? users.length : (stats.totalUsers ?? 0)}
           </span>
         </button>
       </div>
@@ -725,13 +727,17 @@ export default function AdminDashboard() {
               className="w-full px-3.5 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-800 text-sm font-medium text-slate-700"
             >
               <option value="">None / Assign Later</option>
-              {users
-                .filter((u) => u.role !== 'ADMIN')
-                .map((u) => (
-                  <option key={u.id} value={u.id}>
-                    {u.name} ({u.email})
-                  </option>
-                ))}
+              {users.filter((u) => u.role === 'STORE_OWNER').length === 0 ? (
+                <option value="" disabled>No Store Owners registered yet</option>
+              ) : (
+                users
+                  .filter((u) => u.role === 'STORE_OWNER')
+                  .map((u) => (
+                    <option key={u.id} value={u.id} disabled={Boolean(u.store_id)}>
+                      {u.name} ({u.email}){u.store_name ? ` — Already managing ${u.store_name}` : ' — Available'}
+                    </option>
+                  ))
+              )}
             </select>
           </div>
 
