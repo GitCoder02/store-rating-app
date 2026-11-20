@@ -100,7 +100,7 @@ store-rating-app/
 ### Step 1: Clone & Configure
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/GitCoder02/store-rating-app.git
 cd store-rating-app
 ```
 
