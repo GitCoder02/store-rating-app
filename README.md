@@ -105,7 +105,13 @@ cd store-rating-app
 ```
 
 #### Backend Environment Setup
-Create a `.env` file in the `backend/` directory (or edit the existing one):
+Navigate to the `backend` directory and create your `.env` from the provided `.env.example`:
+```bash
+cd backend
+cp .env.example .env      # On Linux / macOS
+copy .env.example .env    # On Windows PowerShell / CMD
+```
+Open `.env` and set your local MySQL credentials:
 ```env
 PORT=5000
 DB_HOST=localhost
