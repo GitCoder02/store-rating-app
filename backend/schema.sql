@@ -43,7 +43,7 @@ INSERT INTO users (id, name, email, password, address, role) VALUES
 (3, 'Siddharth Chandrakant Joshi', 'siddharth.joshi@storeowner.com', '$2a$10$cu4Jz1O0qD9jxB/o0td8TekMhk4Skz4C978G6xC4GBepLSw0P8IOC', 'Tower 3, Apt 804, Kasturi The Balmoral, Balewadi, Pune 411045', 'STORE_OWNER'),
 (4, 'Aditya Shrikant Kulkarni', 'aditya.kulkarni@usermail.com', '$2a$10$cu4Jz1O0qD9jxB/o0td8TekMhk4Skz4C978G6xC4GBepLSw0P8IOC', 'Row House 6, Cosmos Regency, Aundh-Baner Link Road, Pune 411045', 'NORMAL_USER'),
 (5, 'Priyanka Mangesh Deshpande', 'priyanka.deshpande@usermail.com', '$2a$10$cu4Jz1O0qD9jxB/o0td8TekMhk4Skz4C978G6xC4GBepLSw0P8IOC', 'Flat 301, VTP Solitaire, Near Pancard Club Road, Baner, Pune 411045', 'NORMAL_USER')
-ON DUPLICATE KEY UPDATE name=VALUES(name), address=VALUES(address), role=VALUES(role);
+ON DUPLICATE KEY UPDATE name=VALUES(name), email=VALUES(email), address=VALUES(address), role=VALUES(role);
 
 -- Seed Initial Stores in and around Baner, Pune
 INSERT INTO stores (id, name, email, address, owner_id) VALUES
